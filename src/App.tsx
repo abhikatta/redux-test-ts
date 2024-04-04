@@ -39,7 +39,7 @@ function App() {
         </button>
       </div>
 
-      <p>{input}</p>
+      <p>{input ? input : "Enter an input above"}</p>
     </>
   );
 }
