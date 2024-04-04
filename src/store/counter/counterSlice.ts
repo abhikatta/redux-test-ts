@@ -17,9 +17,9 @@ const counterSlice = createSlice({
   // dont know how this is being understood by ts
   // whats a writable draft?
   reducers: {
-    // immutability?
     // 'action' can also be passed as param, by rn its not needed
     increment: (state) => {
+      // immutability?
       // createSlice does lot of things for us, so it automatically
       // understands this mutation code and follows immutability
       // makes a copy, updates it, returns new state
@@ -53,6 +53,12 @@ const counterSlice = createSlice({
 
 // called actions here, but originally they are passed as reducers in above slice
 const { increment, decrement, incrementByValue } = counterSlice.actions;
+// explantion from gpt for above:
+// When you define a reducer function within the reducers object, Redux Toolkit
+// automatically generates corresponding action creators for each reducer function.
+// These action creators are functions that create action objects with the appropriate type and payload.
+
+// basically redux-toolkit does a lot of boilerplate stuff for us
 
 // exports
 export const incrementAsync = createAsyncThunk(

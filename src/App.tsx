@@ -5,10 +5,12 @@ import {
   increment,
   incrementAsync,
   incrementByValue,
-} from "./store/counterSlice";
+} from "./store/counter/counterSlice";
+import { clearInput, setInput } from "./store/input/inputSlice";
 
 function App() {
   const count = useSelector((state: RootState) => state.counter.value);
+  const input = useSelector((state: RootState) => state.input.value);
   // app dispatch is needed when working with async functions
   const dispatch = useDispatch<AppDispatch>();
   return (
@@ -24,6 +26,20 @@ function App() {
         </button>
         <p>{count}</p>
       </div>
+      <div>
+        <input
+          placeholder="enter a value"
+          value={input}
+          onChange={(e) => dispatch(setInput(e.target.value))}></input>
+        <button
+          onClick={() => {
+            dispatch(clearInput());
+          }}>
+          clear input
+        </button>
+      </div>
+
+      <p>{input}</p>
     </>
   );
 }
