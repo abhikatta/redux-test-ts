@@ -43,15 +43,15 @@ const productsSlice = createSlice({
       }
     },
     removeFromCart: (state, action: PayloadAction<CartProduct>) => {
-      const productIndexToRemove = state.products!.findIndex(
+      const productIndexToRemove = state.cartProducts.findIndex(
         (product) => product.id === action.payload.id
       );
       if (productIndexToRemove !== -1) {
         const existingCartProducts = state.cartProducts;
-        if (existingCartProducts![productIndexToRemove].quantity > 1) {
-          existingCartProducts![productIndexToRemove].quantity -= 1;
+        if (existingCartProducts[productIndexToRemove].quantity > 1) {
+          existingCartProducts[productIndexToRemove].quantity -= 1;
         } else {
-          existingCartProducts!.splice(productIndexToRemove, 1);
+          existingCartProducts.splice(productIndexToRemove, 1);
         }
       }
     },
