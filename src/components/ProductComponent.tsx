@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
-
 import { Toaster, toast } from "sonner";
-
 import { Product } from "../store/types";
 import { addToCart } from "../store/product/productSlice";
 

@@ -19,3 +19,7 @@ describe("first", () => {
     expect(counter).toHaveTextContent("0");
   });
 });
+
+describe("test product state", () => {
+  it("should return list products", () => {});
+});

@@ -2,14 +2,15 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { API_ENDPOINT } from "../../constants/api";
 import { CartProduct, Product } from "../types";
 
-const products: Product[] = [];
-const cartProducts: CartProduct[] = [];
-const selectedProduct: Product | null = products[0];
-
-const allProductsInitialState = {
-  products: products,
-  cartProducts: cartProducts,
-  selectedProduct: selectedProduct,
+interface ProductsInitialState {
+  products: Product[] | null;
+  cartProducts: CartProduct[];
+  selectedProduct: Product | null;
+}
+const allProductsInitialState: ProductsInitialState = {
+  products: [],
+  cartProducts: [],
+  selectedProduct: null,
 };
 
 const fetchAllProducts = createAsyncThunk("fetchAllProducts", async () => {
@@ -31,34 +32,34 @@ const productsSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
       const existingCartProducts = state.cartProducts;
-      const existingProductIndex = existingCartProducts.findIndex(
+      const existingProductIndex = existingCartProducts!.findIndex(
         (product) => product.id === action.payload.id
       );
       if (existingProductIndex !== -1) {
-        existingCartProducts[existingProductIndex].quantity += 1;
+        existingCartProducts![existingProductIndex].quantity += 1;
       } else {
         const newCartProduct = { ...action.payload, quantity: 1 };
-        existingCartProducts.push(newCartProduct);
+        existingCartProducts!.push(newCartProduct);
       }
     },
     removeFromCart: (state, action: PayloadAction<CartProduct>) => {
-      const productIndexToRemove = state.products.findIndex(
+      const productIndexToRemove = state.products!.findIndex(
         (product) => product.id === action.payload.id
       );
       if (productIndexToRemove !== -1) {
         const existingCartProducts = state.cartProducts;
-        if (existingCartProducts[productIndexToRemove].quantity > 1) {
-          existingCartProducts[productIndexToRemove].quantity -= 1;
+        if (existingCartProducts![productIndexToRemove].quantity > 1) {
+          existingCartProducts![productIndexToRemove].quantity -= 1;
         } else {
-          existingCartProducts.splice(productIndexToRemove, 1);
+          existingCartProducts!.splice(productIndexToRemove, 1);
         }
       }
     },
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchAllProducts.pending, () => {
-        console.log("fetching data");
+      .addCase(fetchAllProducts.pending, (state) => {
+        state.products = null;
       })
       .addCase(fetchAllProducts.rejected, () => {
         console.log("fetching failed");
@@ -69,6 +70,9 @@ const productsSlice = createSlice({
           state.products = action.payload;
         }
       )
+      .addCase(fetchSelectedProduct.pending, (state) => {
+        state.selectedProduct = null;
+      })
       .addCase(
         fetchSelectedProduct.fulfilled,
         (state, action: PayloadAction<Product>) => {

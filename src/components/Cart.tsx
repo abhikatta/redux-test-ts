@@ -48,7 +48,7 @@ const Cart = () => {
     [cartProducts]
   );
 
-  return cartProducts.length !== 0 ? (
+  return cartProducts?.length !== 0 ? (
     <div className=" w-auto h-auto flex flex-col justify-center items-center">
       <p className="text-3xl font-thin ">
         Total : ${totalPrice.toPrecision(5)}
