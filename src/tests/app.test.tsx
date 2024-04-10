@@ -1,17 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import App from "../App";
-import { Provider } from "react-redux";
-import { store } from "../store/store";
-import userEvent from "@testing-library/user-event";
-const renderAppWithStore = () => {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-};
+import { renderDefaultApp, screen, userEvent } from "../utils/test-utils";
 
-beforeEach(() => renderAppWithStore());
+beforeEach(() => renderDefaultApp());
 
 describe("first", () => {
   test("render app with initial state 0", () => {
