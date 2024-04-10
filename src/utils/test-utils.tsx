@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { afterEach } from "vitest";
 import { store } from "../store/store";
 import React from "react";
-import App from "../App";
+import App from "../BasicRedux";
 
 afterEach(() => {
   cleanup();
