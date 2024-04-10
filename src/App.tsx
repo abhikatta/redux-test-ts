@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { AppDispatch, RootState } from "./store/store";
+import { AppDispatch } from "./store/store";
 import { useEffect } from "react";
-import {
-  addToCart,
-  fetchAllProducts,
-  selectProduct,
-} from "./store/product/productSlice";
-import { Link } from "react-router-dom";
+import { fetchAllProducts } from "./store/product/productSlice";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProductList from "./components/ProductList";
+import ProductDetail from "./components/ProductDetail";
+import Cart from "./components/Cart";
+import Header from "./components/Header";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,49 +16,16 @@ const App = () => {
     dispatch(fetchAllProducts());
   }, []);
 
-  const allProducts = useSelector(
-    (state: RootState) => state.allProducts.products
-  );
-  const cartProducts = useSelector(
-    (state: RootState) => state.allProducts.cartProducts
-  );
-  const selectedProduct = useSelector(
-    (state: RootState) => state.allProducts.selectedProduct
-  );
-  useEffect(() => {
-    console.log(selectedProduct);
-  }, [selectedProduct]);
   return (
-    <div>
-      {allProducts.map((product) => {
-        return (
-          <div
-            onClick={() => dispatch(selectProduct(product))}
-            key={product.id}>
-            <p>{product.id}</p>
-            <p>{product.title}</p>
-            <p>{product.category}</p>
-          </div>
-        );
-      })}
-      {selectedProduct && (
-        <div>
-          {selectedProduct.id}
-          {selectedProduct.category}
-        </div>
-      )}
-      {/* <p>Cart Products:</p> */}
-      {/* <div>
-        {cartProducts.map((product, index) => {
-          return (
-            <div onClick={() => dispatch(addToCart(product))} key={product.id}>
-              <p>{product.id}</p>
-              <p>{product.title}</p>
-              <p>{product.category}</p>
-            </div>
-          );
-        })}
-      </div> */}
+    <div className="w-auto h-full max-w-[100%] overflow-x-hidden min-h-screen flex flex-col bg-slate-300">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" Component={ProductList} />
+          <Route path="/product/:productId" Component={ProductDetail} />
+          <Route path="/cart" Component={Cart} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
