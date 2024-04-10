@@ -24,7 +24,7 @@ function App() {
         <button onClick={() => dispatch(incrementByValue(2))}>
           incre by 2
         </button>
-        <p>{count}</p>
+        <p>Counter: {count}</p>
       </div>
       <div>
         <input
