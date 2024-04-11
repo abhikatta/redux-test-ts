@@ -4,6 +4,7 @@ import { useCallback, useMemo } from "react";
 import { RootState } from "../store/store";
 import { CartProduct } from "../store/types";
 import { addToCart, removeFromCart } from "../store/product/productSlice";
+import Header from "./Header";
 
 const Cart = () => {
   const cartProducts = useSelector(
@@ -18,7 +19,7 @@ const Cart = () => {
   const cartItems = useCallback(
     (cartProducts: CartProduct[]) => {
       return (
-        <div className="w-auto h-auto sm:grid sm:grid-cols-2 flex flex-col md:grid md:grid-cols-4 gap-3 ">
+        <div className="w-auto h-auto sm:grid sm:grid-cols-2 flex flex-col md:grid md:grid-cols-4 gap-3 mx-4 ">
           {cartProducts.map((product: CartProduct) => (
             <div
               className="py-2 px-4 bg-white w-auto h-auto justify-center items-center flex flex-col  rounded-md"
@@ -48,15 +49,21 @@ const Cart = () => {
     [cartProducts]
   );
 
-  return cartProducts?.length !== 0 ? (
-    <div className=" w-auto h-auto flex flex-col justify-center items-center">
-      <p className="text-3xl font-thin ">
-        Total : ${totalPrice.toPrecision(5)}
-      </p>
-      {cartItems(cartProducts)}
+  return (
+    <div>
+      <Header />
+
+      {cartProducts?.length !== 0 ? (
+        <div className=" w-auto h-auto flex flex-col justify-center items-center">
+          <p className="text-3xl font-thin ">
+            Total : ${totalPrice.toPrecision(5)}
+          </p>
+          {cartItems(cartProducts)}
+        </div>
+      ) : (
+        <p className="text-center">No items in cart...</p>
+      )}
     </div>
-  ) : (
-    <p className="text-center">No items in cart...</p>
   );
 };
 

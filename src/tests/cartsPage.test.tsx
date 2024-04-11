@@ -1,17 +1,17 @@
 import App from "../App";
 import { renderWithProviders, screen, userEvent } from "../utils/test-utils";
 
-// describe("for carts page", () => {
-//   beforeEach(async () => renderWithProviders(<App />));
-//   test("initial render of the cart page", async () => {
-//     const cartButton = screen.getByRole("button", { name: /Cart/i });
-//     await userEvent.click(cartButton);
-//     expect(screen.getByText(/No Items in cart/i)).toBeInTheDocument();
-//   });
-// });
+describe("for carts page", () => {
+  test("initial render of the cart page", async () => {
+    renderWithProviders(<App />);
+    const cartButton = screen.getByRole("button", { name: /Show Cart/i });
+    await userEvent.click(cartButton);
+    expect(screen.getByText(/No Items in cart/i)).toBeInTheDocument();
+  });
+});
 
 describe("group", () => {
-  beforeEach(() => renderWithProviders(<App />));
+  renderWithProviders(<App />);
   test("when added a cart item", async () => {
     const addToCartButtons = await screen.findAllByText(/Add to Cart/i);
     await userEvent.click(addToCartButtons[0]);

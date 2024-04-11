@@ -7,7 +7,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
-import Header from "./components/Header";
 import BasicRedux from "./BasicRedux";
 
 const App = () => {
@@ -20,7 +19,6 @@ const App = () => {
   return (
     <div className="w-auto h-full max-w-[100%] overflow-x-hidden min-h-screen flex flex-col bg-slate-300">
       <BrowserRouter>
-        <Header />
         <Routes>
           <Route path="/" Component={ProductList} />
           <Route path="/product/:productId" Component={ProductDetail} />

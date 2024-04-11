@@ -6,6 +6,7 @@ import ProductComponent from "./ProductComponent";
 import { fetchAllProducts } from "../store/product/productSlice";
 import { AppDispatch, RootState } from "../store/store";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 const ProductList = () => {
   const products = useSelector(
@@ -19,7 +20,9 @@ const ProductList = () => {
 
   return products !== null ? (
     <>
-      <div className="w-auto mx-3 my-3  h-auto sm:grid sm:grid-cols-2 flex flex-col md:grid md:grid-cols-4 gap-3 ">
+      <Header />
+
+      <div className="w-auto mx-3 my-3 h-auto sm:grid sm:grid-cols-2 flex flex-col md:grid md:grid-cols-4 gap-3 ">
         {products.map((product) => (
           <ProductComponent key={product.id} product={product} />
         ))}
