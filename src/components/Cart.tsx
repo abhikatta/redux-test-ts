@@ -4,7 +4,6 @@ import { useCallback, useMemo } from "react";
 import { RootState } from "../store/store";
 import { CartProduct } from "../store/types";
 import { addToCart, removeFromCart } from "../store/product/productSlice";
-import Header from "./Header";
 
 const Cart = () => {
   const cartProducts = useSelector(
@@ -49,21 +48,15 @@ const Cart = () => {
     [cartProducts]
   );
 
-  return (
-    <div>
-      <Header />
-
-      {cartProducts?.length !== 0 ? (
-        <div className=" w-auto h-auto flex flex-col justify-center items-center">
-          <p className="text-3xl font-thin ">
-            Total : ${totalPrice.toPrecision(5)}
-          </p>
-          {cartItems(cartProducts)}
-        </div>
-      ) : (
-        <p className="text-center">No items in cart...</p>
-      )}
+  return cartProducts?.length !== 0 ? (
+    <div className=" w-auto h-auto flex flex-col justify-center items-center">
+      <p className="text-3xl font-thin ">
+        Total : ${totalPrice.toPrecision(5)}
+      </p>
+      {cartItems(cartProducts)}
     </div>
+  ) : (
+    <p className="text-center">No items in cart...</p>
   );
 };
 
