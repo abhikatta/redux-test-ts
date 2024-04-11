@@ -7,7 +7,7 @@ interface ProductsInitialState {
   cartProducts: CartProduct[];
   selectedProduct: Product | null;
 }
-const allProductsInitialState: ProductsInitialState = {
+export const allProductsInitialState: ProductsInitialState = {
   products: [],
   cartProducts: [],
   selectedProduct: null,

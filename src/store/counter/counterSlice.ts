@@ -6,7 +6,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 interface CounterState {
   value: number;
 }
-const initialState: CounterState = {
+export const initialState: CounterState = {
   value: 0,
 };
 // this does most things (removes so much boilerplate code

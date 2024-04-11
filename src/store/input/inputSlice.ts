@@ -4,7 +4,7 @@ interface InputState {
   value: string;
 }
 
-const initialState: InputState = {
+export const initialState: InputState = {
   value: "",
 };
 

@@ -5,6 +5,7 @@ import ProductComponent from "./ProductComponent";
 
 import { fetchAllProducts } from "../store/product/productSlice";
 import { AppDispatch, RootState } from "../store/store";
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
   const products = useSelector(
@@ -21,10 +22,24 @@ const ProductList = () => {
       {products.map((product) => (
         <ProductComponent key={product.id} product={product} />
       ))}
+      <div className="bottom-0 flex flex-col items-center justify-center w-full">
+        <Link
+          className="rounded-md px-4 text-center py-2 font-bold bg-cyan-100 hover:bg-cyan-400 duration-200"
+          to={"/basics"}>
+          <button>Redux Basic implementation</button>
+        </Link>
+      </div>
     </div>
   ) : (
     <div className="h-full mt-[20%] w-full flex flex-col items-center justify-center">
       <p className="font-bold text-5xl">Loading...</p>
+      <div className="bottom-0 flex flex-col items-center justify-center w-full">
+        <Link
+          className="rounded-md px-4 text-center py-2 font-bold bg-cyan-100 hover:bg-cyan-400 duration-200"
+          to={"/basics"}>
+          <button>Redux Basic implementation</button>
+        </Link>
+      </div>
     </div>
   );
 };

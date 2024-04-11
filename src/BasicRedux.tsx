@@ -14,7 +14,7 @@ function BasicRedux() {
   // app dispatch is needed when working with async functions
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <>
+    <div>
       <div>
         <button onClick={() => dispatch(increment())}>incre</button>
         <button onClick={() => dispatch(incrementAsync(10))}>
@@ -30,6 +30,7 @@ function BasicRedux() {
         <input
           placeholder="enter a value"
           value={input}
+          name="enter a value"
           onChange={(e) => dispatch(setInput(e.target.value))}></input>
         <button
           onClick={() => {
@@ -40,7 +41,7 @@ function BasicRedux() {
       </div>
 
       <p>{input ? input : "Enter an input above"}</p>
-    </>
+    </div>
   );
 }
 
