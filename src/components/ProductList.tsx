@@ -18,28 +18,23 @@ const ProductList = () => {
   }, []);
 
   return products !== null ? (
-    <div className="w-auto mx-3 my-3  h-auto sm:grid sm:grid-cols-2 flex flex-col md:grid md:grid-cols-4 gap-3 ">
-      {products.map((product) => (
-        <ProductComponent key={product.id} product={product} />
-      ))}
-      <div className="bottom-0 flex flex-col items-center justify-center w-full">
+    <>
+      <div className="w-auto mx-3 my-3  h-auto sm:grid sm:grid-cols-2 flex flex-col md:grid md:grid-cols-4 gap-3 ">
+        {products.map((product) => (
+          <ProductComponent key={product.id} product={product} />
+        ))}
+      </div>
+      <div className=" mb-3 flex flex-col items-center justify-center w-full">
         <Link
           className="rounded-md px-4 text-center py-2 font-bold bg-cyan-100 hover:bg-cyan-400 duration-200"
           to={"/basics"}>
           <button>Redux Basic implementation</button>
         </Link>
       </div>
-    </div>
+    </>
   ) : (
     <div className="h-full mt-[20%] w-full flex flex-col items-center justify-center">
       <p className="font-bold text-5xl">Loading...</p>
-      <div className="bottom-0 flex flex-col items-center justify-center w-full">
-        <Link
-          className="rounded-md px-4 text-center py-2 font-bold bg-cyan-100 hover:bg-cyan-400 duration-200"
-          to={"/basics"}>
-          <button>Redux Basic implementation</button>
-        </Link>
-      </div>
     </div>
   );
 };
