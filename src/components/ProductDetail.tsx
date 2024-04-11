@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { AppDispatch, RootState } from "../store/store";
 import { addToCart, fetchSelectedProduct } from "../store/product/productSlice";
 import { Toaster, toast } from "sonner";
-import Header from "./Header";
 const ProductDetail = () => {
   const product = useSelector(
     (state: RootState) => state.allProducts.selectedProduct

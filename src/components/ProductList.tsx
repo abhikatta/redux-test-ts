@@ -6,7 +6,6 @@ import ProductComponent from "./ProductComponent";
 import { fetchAllProducts } from "../store/product/productSlice";
 import { AppDispatch, RootState } from "../store/store";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 
 const ProductList = () => {
   const products = useSelector(
