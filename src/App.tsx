@@ -1,47 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "./store/store";
-import {
-  decrement,
-  increment,
-  incrementAsync,
-  incrementByValue,
-} from "./store/counter/counterSlice";
-import { clearInput, setInput } from "./store/input/inputSlice";
+import { useDispatch } from "react-redux";
 
-function App() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const input = useSelector((state: RootState) => state.input.value);
-  // app dispatch is needed when working with async functions
+import { AppDispatch } from "./store/store";
+import { useEffect } from "react";
+import { fetchAllProducts } from "./store/product/productSlice";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProductList from "./components/ProductList";
+import ProductDetail from "./components/ProductDetail";
+import Cart from "./components/Cart";
+import Header from "./components/Header";
+
+const App = () => {
   const dispatch = useDispatch<AppDispatch>();
-  return (
-    <>
-      <div>
-        <button onClick={() => dispatch(increment())}>incre</button>
-        <button onClick={() => dispatch(incrementAsync(10))}>
-          incre async
-        </button>
-        <button onClick={() => dispatch(decrement())}>decre</button>
-        <button onClick={() => dispatch(incrementByValue(2))}>
-          incre by 2
-        </button>
-        <p>{count}</p>
-      </div>
-      <div>
-        <input
-          placeholder="enter a value"
-          value={input}
-          onChange={(e) => dispatch(setInput(e.target.value))}></input>
-        <button
-          onClick={() => {
-            dispatch(clearInput());
-          }}>
-          clear input
-        </button>
-      </div>
 
-      <p>{input ? input : "Enter an input above"}</p>
-    </>
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, []);
+
+  return (
+    <div className="w-auto h-full max-w-[100%] overflow-x-hidden min-h-screen flex flex-col bg-slate-300">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" Component={ProductList} />
+          <Route path="/product/:productId" Component={ProductDetail} />
+          <Route path="/cart" Component={Cart} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-}
+};
 
 export default App;

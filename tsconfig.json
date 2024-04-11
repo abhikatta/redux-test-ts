@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    // comment by me : if we add this here, we can directly use
+    // describe, it, expect in the test files, else we have to manually import thos
+    "types": ["vitest", "node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
