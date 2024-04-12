@@ -1,20 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { RootState } from "../store/store";
 import { CartProduct } from "../store/types";
 import { addToCart, removeFromCart } from "../store/product/productSlice";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartProducts = useSelector(
     (state: RootState) => state.allProducts.cartProducts
   );
+  const user = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const totalPrice: number = useMemo(() => {
     return cartProducts.reduce((sum: number, product: CartProduct) => {
       return sum + product.price * product.quantity;
     }, 0);
   }, [cartProducts]);
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+      navigate("/");
+    }
+  }, [user.isLoggedIn]);
   const cartItems = useCallback(
     (cartProducts: CartProduct[]) => {
       return (

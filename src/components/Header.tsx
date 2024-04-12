@@ -20,7 +20,9 @@ const Header = () => {
             to={"/cart"}>
             <button>Show Cart</button>
           </Link>
-          <button onClick={() => logout(signOut, auth, navigate)}>
+          <button
+            className="px-10 py-2 rounded-md outline-none bg-red-300 text-black hover:bg-red-600 hover:text-white"
+            onClick={() => logout(signOut, auth, navigate)}>
             Logout
           </button>
         </nav>
