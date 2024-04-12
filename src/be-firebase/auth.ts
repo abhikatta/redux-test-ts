@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AuthType } from "./firebase-config";
+import { toast } from "sonner";
 
 const logout = async (
   signOut: Function,
@@ -28,11 +29,13 @@ const signup = async (
   try {
     if (email && password && confirmPassword && password === confirmPassword) {
       await createUserWithEmailAndPassword(auth, email, password);
+      toast.success("Logging in!");
       navigate("/");
     }
   } catch (error) {
     if (error instanceof Error) {
       console.log("something went wrong:", error.message);
+      toast.error("Error Signing up!");
     }
     console.log("something went wrong:", error);
   }
@@ -48,6 +51,8 @@ const login = async (
   try {
     if (email && password) {
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Logging in!");
+
       navigate("/");
     } else {
       console.log("missing creds");
@@ -55,6 +60,7 @@ const login = async (
   } catch (error) {
     if (error instanceof Error) {
       console.log("something went wrong:", error.message);
+      toast.error("Error Logging in!");
     }
     console.log("something went wrong:", error);
   }
