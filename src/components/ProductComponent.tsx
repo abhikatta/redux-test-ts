@@ -3,9 +3,17 @@ import { useDispatch } from "react-redux";
 import { Toaster, toast } from "sonner";
 import { Product } from "../store/types";
 import { addToCart } from "../store/product/productSlice";
+// import { doc, setDoc } from "firebase/firestore";
+// import { db } from "../be-firebase/firebase-config";
 
 const ProductComponent = ({ product }: { product: Product }) => {
   const dispatch = useDispatch();
+
+  const AddToFirebase = async () => {
+    // await setDoc(doc(db, `${user}`, "cart", "items"), {
+    //   product,
+    // });
+  };
   return (
     <div
       key={product.id}
@@ -34,8 +42,9 @@ const ProductComponent = ({ product }: { product: Product }) => {
       </Link>
       <button
         className="bg-slate-200 hover:bg-slate-700 hover:text-white duration-300 rounded-md my-2 px-4 py-2"
-        onClick={() => {
+        onClick={async () => {
           dispatch(addToCart(product));
+          await AddToFirebase();
           toast.success(`${product.title} has been added to cart!`);
         }}>
         Add to Cart

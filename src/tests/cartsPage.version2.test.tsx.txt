@@ -1,0 +1,27 @@
+import React from "react";
+import { render } from "@testing-library/react";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import { RootState } from "../store/store";
+import counterReducer from "../store/counter/counterSlice";
+import inputReducer from "../store/input/inputSlice";
+import productsReducer from "../store/product/productSlice";
+
+export function renderWithProviders(
+  ui: React.ReactElement,
+  {
+    store = configureStore({
+      reducer: {
+        counter: counterReducer,
+        input: inputReducer,
+        allProducts: productsReducer,
+      },
+    }),
+  }
+) {
+  return <Provider store={store}>{children}</Provider>;
+}
+
+function Wrapper({ children }: { children: React.ReactNode }) {
+  return <Provider store={store}>{children}</Provider>;
+}

@@ -10,8 +10,15 @@ interface Product {
     count: number;
   };
 }
+
 interface CartProduct extends Product {
   quantity: number;
 }
 
-export type { CartProduct, Product };
+interface User {
+  email: string | null;
+  password: string | null;
+  setPassword?: string | null;
+}
+
+export type { CartProduct, Product, User };

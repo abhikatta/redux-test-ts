@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../be-firebase/auth";
+import { signOut } from "firebase/auth";
+import { auth } from "../be-firebase/firebase-config";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <nav className="w-auto h-auto mx-3 my-4 flex flex-row justify-around items-center ">
@@ -12,6 +16,7 @@ const Header = () => {
           to={"/cart"}>
           <button>Show Cart</button>
         </Link>
+        <button onClick={() => logout(signOut, auth, navigate)}>Logout</button>
       </nav>
     </div>
   );
